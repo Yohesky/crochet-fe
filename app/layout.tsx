@@ -9,13 +9,23 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kalu-crochet.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Crochet",
   description: "Tienda de crochets",
   openGraph: {
     title: "Crochet",
     description: "Tienda de crochets",
     type: "website",
+    siteName: "Crochet",
+    locale: "es_ES",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Crochet",
+    description: "Tienda de crochets",
   },
 };
 
