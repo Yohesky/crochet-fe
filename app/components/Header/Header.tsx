@@ -1,8 +1,16 @@
+import Image from "next/image";
+
 export const Header = () => {
   return (
     <header className="flex items-center gap-4 px-4 py-4 sm:px-6 justify-between bg-[#FDE2E4]">
-      <a href="#" className="text-xl font-bold text-ink-900">
-        KYL Crochet
+      <a href="#" className="relative h-10 w-10">
+        <Image
+          src="https://res.cloudinary.com/do5wuwfuh/image/upload/f_auto,q_auto,w_400/crochet/logo-header.jpg"
+          alt="KYL Crochet"
+          fill
+          sizes="40px"
+          className="object-cover rounded-full"
+        />
       </a>
 
 

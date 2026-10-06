@@ -9,7 +9,7 @@ export const Layout = ({ products }: { products: ProductList }) => {
       <Header />
       <Hero />
       <main>
-        <div className="grid grid-cols-2 gap-4 -mt-20 px-4 pb-12 z-1 relative bg-[#FDE2E4]" >
+        <div className="grid grid-cols-2 gap-4 -mt-5 px-4 pb-12 z-1 relative bg-[#FDE2E4]" >
           {
             products.items.map((product) => {
               return <Card key={product.id} product={product} />

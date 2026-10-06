@@ -8,7 +8,6 @@ const nextConfig: NextConfig = {
         hostname: "res.cloudinary.com",
         port: "",
         pathname: "/**",
-        search: "",
       }
     ],
   },

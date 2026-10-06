@@ -12,6 +12,11 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Crochet",
   description: "Tienda de crochets",
+  openGraph: {
+    title: "Crochet",
+    description: "Tienda de crochets",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
