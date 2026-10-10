@@ -12,7 +12,7 @@ export const Hero = () => {
                 sizes="100vw"
                 className="h-auto w-full"
             />
-            <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#FDE2E4] via-[#FDE2E4]/50 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#FDE2E4] via-[#FDE2E4]/50 to-transparent" />
             {/* <div className="relative container mx-auto flex h-full flex-col items-center justify-center">
                 <h1>Hero</h1>
 

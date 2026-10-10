@@ -1,12 +1,16 @@
+"use client"
 import type { IProduct } from "@/src/domain/models/IProduct";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/app/components/Button/Button";
+import { useCartStore } from "@/app/store/store";
 
 const formatPrice = (price: number) =>
     `$${price.toLocaleString("es-CO", { maximumFractionDigits: 0 })}`;
 
 export const Card = ({ product }: { product: IProduct }) => {
+
+    const { addToCart } = useCartStore()
     return (
         <article className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-lg shadow-ink-900/10 ring-1 ring-ink-900/5 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-xl">
             <Link href={product.link} className="relative block aspect-square overflow-hidden">
@@ -23,7 +27,7 @@ export const Card = ({ product }: { product: IProduct }) => {
                 <Link href={product.link}>
                     <h2 className="text-lg font-semibold text-ink-900">{product.title}</h2>
                 </Link>
-                <p className="text-sm leading-relaxed text-ink-600">
+                <p className="line-clamp-3 text-sm leading-relaxed text-ink-600">
                     {product.description}
                 </p>
 
@@ -33,7 +37,7 @@ export const Card = ({ product }: { product: IProduct }) => {
                     </span>
                 </div>
 
-                <Button size="sm" className="mt-1 w-full">
+                <Button size="sm" className="mt-1 w-full text-xs" onClick={() => addToCart(product)}>
                     Agregar al carrito
                 </Button>
             </div>

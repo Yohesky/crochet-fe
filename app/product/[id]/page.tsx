@@ -41,6 +41,22 @@ export default async function ProductDetailPage({
                         {product.description}
                     </p>
 
+                    <dl className="mt-2 flex flex-col gap-4">
+                        {product.details.map((detail) => (
+                            <div
+                                key={detail.label}
+                                className="flex flex-col gap-1 border-t border-ink-900/10 pt-4 first:border-t-0 first:pt-0"
+                            >
+                                <dt className="text-xs font-bold uppercase tracking-wide text-lavender-600">
+                                    {detail.label}
+                                </dt>
+                                <dd className="text-sm leading-relaxed text-ink-600">
+                                    {detail.value}
+                                </dd>
+                            </div>
+                        ))}
+                    </dl>
+
                     <div className="mt-2 flex items-center justify-between">
                         <span className="text-2xl font-bold tabular-nums text-ink-900">
                             {formatPrice(product.price)}

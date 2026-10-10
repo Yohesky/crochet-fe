@@ -15,17 +15,29 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Crochet",
   description: "Tienda de crochets",
+  icons: {
+    icon: "/icon.png",
+  },
   openGraph: {
     title: "Crochet",
     description: "Tienda de crochets",
     type: "website",
     siteName: "Crochet",
     locale: "es_ES",
+    images: [
+      {
+        url: "/opengraph-image.jpg",
+        width: 1079,
+        height: 992,
+        alt: "KYL Crochet",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Crochet",
     description: "Tienda de crochets",
+    images: ["/opengraph-image.jpg"],
   },
 };
 
