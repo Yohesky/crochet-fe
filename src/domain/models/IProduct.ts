@@ -4,6 +4,7 @@ export interface IProduct {
     price: number
     description: string
     image: string
+    link: string
 }
 
 export type ProductList = {
