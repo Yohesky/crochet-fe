@@ -4,7 +4,7 @@ export const products: IProduct[] = [
     {
         id: "1",
         title: "Abuelita Ángel Personalizada",
-        price: 50000,
+        price: 95000,
         description:
             "Un homenaje único hecho a mano para honrar, recordar o celebrar a esa persona tan especial en tu vida. Nuestra Abuelita Ángel está tejida cuidadosamente a crochet punto por punto, capturando toda la dulzura y el cariño de tus seres queridos.",
         details: [
@@ -30,7 +30,7 @@ export const products: IProduct[] = [
     {
         id: "2",
         title: "Messi Amigurumi – Selección Argentina #10",
-        price: 30000,
+        price: 110000,
         description:
             "¡El regalo perfecto para los verdaderos apasionados del fútbol! ⚽✨ Lleva a casa la versión tejida a mano de uno de los mejores jugadores del mundo o sorprende a ese fanático especial. Nuestro amigurumi del Capitán #10 está elaborado meticulosamente a crochet, recreando cada detalle característico: su icónica barba, el peinado, la camiseta con sus franjas y número, sus guayos amarillos y su práctica base de soporte.",
         details: [
@@ -82,7 +82,7 @@ export const products: IProduct[] = [
     {
         id: "4",
         title: "Teemo – League of Legends",
-        price: 50000,
+        price: 80000,
         description:
             "¡Nunca subestimes el poder del código Yordle! 🍄✨🎮 Llega el explorador más icónico de League of Legends directo a tu colección o tu setup gamer. Este amigurumi de Teemo está tejido completamente a mano a crochet, cuidando cada detalle característico del personaje: su sombrero de explorador verde con antiparras rojas y plumita azul, su pañuelo rojo y su expresión tierna y victoriosa.",
         details: [
@@ -109,7 +109,7 @@ export const products: IProduct[] = [
     {
         id: "5",
         title: "Spider-Girl Amigurumi Personalizada",
-        price: 50000,
+        price: 100000,
         description:
             "¡Conviértete en el héroe de tu propia historia! 🕸️✨🕷️ Nuestra Spider-Girl Personalizada es el regalo perfecto para las amantes de los superhéroes y las historias épicas. Tejida 100% a mano en la técnica de amigurumi, esta muñeca combina la ternura del personaje con su icónico traje rojo y azul, emblema de araña en el pecho y su distintivo gorrito/máscara desplegable.",
         details: [
@@ -138,7 +138,7 @@ export const products: IProduct[] = [
     {
         id: "6",
         title: 'Gorila Blanco "Copito de Nieve"',
-        price: 50000,
+        price: 90000,
         description:
             '¡Un abrazable y único compañero lleno de ternura! 🦍🤍✨ Nuestro Gorila Blanco "Copito de Nieve" está tejido 100% a mano en la técnica de amigurumi. Su diseño combina el tono blanco principal con delicados contrastes en beige/crema en la pancita, hocico y patitas, dándole una apariencia entrañable y muy afelpada. Es la pieza perfecta para decorar la habitación de los más pequeños, regalar en una ocasión especial o sumar a tu colección artesanal.',
         details: [
@@ -161,11 +161,12 @@ export const products: IProduct[] = [
         ],
         image: "https://res.cloudinary.com/do5wuwfuh/image/upload/w_800,q_auto,f_auto/crochet/gorila.jpg",
         link: "/product/6",
+        isPersonalized: true
     },
     {
         id: "7",
         title: "Perrito Negro Amigurumi Personalizado",
-        price: 50000,
+        price: 70000,
         description:
             "¡El amor incondicional de tu mejor amigo de cuatro patas, inmortalizado en hilo! 🐾🖤✨ Nuestro Perrito Negro en Amigurumi está elaborado 100% a mano con la técnica de crochet, cuidando cada detalle para transmitir toda la ternura de tu mascota. Desde sus orejitas caídas y mirada expresiva hasta sus señas particulares (como manchas de color en el hocico o pecho), esta figura tejida es la forma perfecta de llevar a tu peludito contigo o recordar a esa mascota que dejó una huella en tu corazón.",
         details: [
