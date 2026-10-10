@@ -4,13 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/app/components/Button/Button";
 import { useCartStore } from "@/app/store/store";
-
-const formatPrice = (price: number) =>
-    `$${price.toLocaleString("es-CO", { maximumFractionDigits: 0 })}`;
+import { useAlertStore } from "@/app/store/alert.store";
+import { Pill, SparkleIcon } from "@/app/components/Pill/Pill";
+import { formatPrice } from "@/src/presentation/formatters/priceFormatter";
 
 export const Card = ({ product }: { product: IProduct }) => {
 
     const { addToCart } = useCartStore()
+    const showToast = useAlertStore((state) => state.showToast)
+
+    const handleAddToCart = () => {
+        addToCart(product)
+        showToast("Producto agregado")
+    }
     return (
         <article className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-lg shadow-ink-900/10 ring-1 ring-ink-900/5 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-xl">
             <Link href={product.link} className="relative block aspect-square overflow-hidden">
@@ -21,6 +27,12 @@ export const Card = ({ product }: { product: IProduct }) => {
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
+                {product.isPersonalized && (
+                    <Pill className="absolute left-3 top-3">
+                        <SparkleIcon className="h-3.5 w-3.5 text-blush-500" />
+                        Personalizado
+                    </Pill>
+                )}
             </Link>
 
             <div className="flex flex-1 flex-col gap-2 p-4">
@@ -37,7 +49,7 @@ export const Card = ({ product }: { product: IProduct }) => {
                     </span>
                 </div>
 
-                <Button size="sm" className="mt-1 w-full text-xs" onClick={() => addToCart(product)}>
+                <Button size="sm" className="mt-1 w-full text-xs" onClick={handleAddToCart}>
                     Agregar al carrito
                 </Button>
             </div>

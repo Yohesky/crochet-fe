@@ -3,9 +3,7 @@
 import type { IProduct } from "@/src/domain/models/IProduct"
 import Image from "next/image"
 import { useCartStore } from "@/app/store/store"
-
-const formatPrice = (price: number) =>
-    `$${price.toLocaleString("es-CO", { maximumFractionDigits: 0 })}`
+import { formatPrice } from "@/src/presentation/formatters/priceFormatter"
 
 export const ItemCart = ({ product }: { product: IProduct }) => {
     const { removeFromCart } = useCartStore()

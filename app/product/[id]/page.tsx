@@ -3,9 +3,7 @@ import Image from "next/image";
 import { productUseCaseImpl } from "@/src/config/container";
 import { Button } from "@/app/components/Button/Button";
 import { Layout } from "@/app/components/Layout/Layout";
-
-const formatPrice = (price: number) =>
-    `$${price.toLocaleString("es-CO", { maximumFractionDigits: 0 })}`;
+import { formatPrice } from "@/src/presentation/formatters/priceFormatter";
 
 export default async function ProductDetailPage({
     params,

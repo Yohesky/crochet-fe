@@ -16,6 +16,14 @@
   --color-blush-400: #f472b6;
   --color-blush-500: #ec4899;
 
+  /* Salvia — confirmaciones y avisos positivos */
+  --color-sage-50: #f2faf4;
+  --color-sage-100: #e2f4e8;
+  --color-sage-200: #c2e8cf;
+  --color-sage-500: #34a05a;
+  --color-sage-600: #26854a;
+  --color-sage-700: #1d6b3b;
+
   /* Tinta cálida — texto */
   --color-ink-900: #3b2a3a;
   --color-ink-600: #6b5568;
@@ -24,6 +32,7 @@
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 
   --animate-alert-in: alert-in 0.3s ease-out;
+  --animate-toast-in: toast-in 0.3s cubic-bezier(0.21, 1.02, 0.73, 1);
 
   @keyframes alert-in {
     from {
@@ -33,6 +42,17 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 }

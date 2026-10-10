@@ -11,6 +11,7 @@ export interface IProduct {
     details: ProductDetail[]
     image: string
     link: string
+    isPersonalized?: boolean
 }
 
 export type ProductList = {
