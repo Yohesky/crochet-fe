@@ -5,6 +5,9 @@ import { Button } from "@/app/components/Button/Button";
 import { Layout } from "@/app/components/Layout/Layout";
 import { formatPrice } from "@/src/presentation/formatters/priceFormatter";
 
+// Rebuilds the page (re-fetching the Google Sheet) at most every 2 minutes.
+export const revalidate = 120;
+
 export default async function ProductDetailPage({
     params,
 }: {
