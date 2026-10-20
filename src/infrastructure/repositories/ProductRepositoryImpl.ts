@@ -4,12 +4,12 @@ import { ProductRepository } from "@/src/domain/repositories/productRepository";
 
 export const ProductRepositoryImpl: ProductRepository = {
     async getProducts(): Promise<ProductList> {
-        const products = getProductsApi()
+        const products = await getProductsApi()
         return { items: products }
     },
 
     async getProductDetail(id: string): Promise<IProduct> {
-        const product = getProductById(id);
+        const product = await getProductById(id);
 
         if (!product) {
             throw new Error(`Producto ${id} no encontrado`);
