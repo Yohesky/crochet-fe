@@ -5,11 +5,17 @@ import { useCartStore } from "@/app/store/store"
 import { ItemCart } from "./ItemCart"
 import { EmptyCart } from "./EmptyCart"
 import { Footer } from "./Footer"
+import { CheckoutForm } from "./CheckoutForm"
 
 export const Cart = () => {
-    const { cart, showCart, toggleCart } = useCartStore()
-    console.log(cart)
+    const { cart, showCart, toggleCart, checkoutStep, setCheckoutStep } = useCartStore()
     const total = cart.reduce((sum, item) => sum + item.price, 0)
+    const showCheckout = checkoutStep === "details" && cart.length > 0
+
+    // Return to the cart view if the cart becomes empty while on checkout
+    useEffect(() => {
+        if (cart.length === 0 && checkoutStep === "details") setCheckoutStep("cart")
+    }, [cart.length, checkoutStep, setCheckoutStep])
 
     // Lock body scroll + close on Escape while the cart is open
     useEffect(() => {
@@ -49,7 +55,9 @@ export const Cart = () => {
             >
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-ink-900/10 px-6 py-4">
-                    <h2 className="text-lg font-bold text-ink-900">Carrito</h2>
+                    <h2 className="text-lg font-bold text-ink-900">
+                        {showCheckout ? "Finalizar pedido" : "Carrito"}
+                    </h2>
                     <button
                         onClick={toggleCart}
                         className="flex h-9 w-9 items-center justify-center rounded-full text-ink-600 transition-colors hover:bg-ink-900/5 hover:text-ink-900"
@@ -66,21 +74,28 @@ export const Cart = () => {
                     </button>
                 </div>
 
-                {/* Cart Items */}
-                <div className="flex-1 overflow-y-auto px-6 py-4">
-                    {cart.length === 0 ? (
-                        <EmptyCart />
-                    ) : (
-                        <div className="flex flex-col gap-3">
-                            {cart.map((item, index) => (
-                                <ItemCart key={`${item.id}-${index}`} product={item} />
-                            ))}
+                {showCheckout ? (
+                    /* Checkout details step */
+                    <CheckoutForm total={total} />
+                ) : (
+                    /* Cart step: items + footer */
+                    <div className="flex flex-1 flex-col overflow-hidden animate-slide-in-left motion-reduce:animate-none">
+                        <div className="flex-1 overflow-y-auto px-6 py-4">
+                            {cart.length === 0 ? (
+                                <EmptyCart />
+                            ) : (
+                                <div className="flex flex-col gap-3">
+                                    {cart.map((item, index) => (
+                                        <ItemCart key={`${item.id}-${index}`} product={item} />
+                                    ))}
+                                </div>
+                            )}
                         </div>
-                    )}
-                </div>
 
-                {/* Footer */}
-                <Footer total={total} isEmpty={cart.length === 0} />
+                        {/* Footer */}
+                        <Footer total={total} isEmpty={cart.length === 0} />
+                    </div>
+                )}
             </aside>
         </>
     )
