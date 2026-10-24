@@ -14,7 +14,7 @@ Justificación: no existía ninguna librería de formularios ni de validación e
 
 | Archivo | Cambio |
 |---|---|
-| `app/store/store.ts` | Tipos `CheckoutStep` y `CheckoutData`; estado `checkoutStep`, `checkoutData` y acciones `setCheckoutStep` / `setCheckoutData` |
+| `app/store/store.ts` | Tipos `CheckoutStep` y `CheckoutData` (incluye `customizations`); estado `checkoutStep`, `checkoutData` y acciones `setCheckoutStep` / `setCheckoutData` |
 | `app/components/Cart/CheckoutForm.tsx` | Nuevo: formulario con RHF + zod, botón "Volver al carrito", alert de pago 50/50, botón "Pagar" |
 | `app/components/Cart/Cart.tsx` | Conmutación de vista según `checkoutStep`, guard de carrito vacío, header dinámico, remoción de `console.log` residual |
 | `app/components/Cart/Footer.tsx` | Botón pasa de "Pagar" a "Siguiente" (`setCheckoutStep("details")`); el alert de pago se movió a `CheckoutForm` |
@@ -25,6 +25,7 @@ Justificación: no existía ninguna librería de formularios ni de validación e
 - **Vista activa**: `showCheckout = checkoutStep === "details" && cart.length > 0`. El render conmuta entre `CheckoutForm` y la vista de carrito; el desmonte/monte natural dispara las animaciones de entrada (no se animan salidas).
 - **Persistencia del formulario**: suscripción a `watch()` de RHF que sincroniza los valores hacia `checkoutData` del store; `defaultValues` lee del store. Al enviar, se guardan los valores con trim.
 - **Validación**: `zodResolver` con `mode: "onTouched"`; `isValid` de `formState` controla el `disabled` del botón "Pagar".
+- **Campo de cambios/adaptaciones**: `textarea` opcional (máx. 500 caracteres) registrado en RHF y persistido en el store como el resto del form. Debajo se renderiza siempre una línea informativa verde (`text-sm text-sage-600`) con el mismo markup que los mensajes de error (`text-sm text-blush-500`), pero fija y sin lógica de validación.
 - **Estados del alert**: `showInstructions` es estado local de `CheckoutForm` (igual que estaba en `Footer`); los datos de WhatsApp (`WHATSAPP_NUMBER`, `WHATSAPP_MESSAGE`) se mantienen hardcodeados allí.
 - **Accesibilidad**: labels con `htmlFor`, `aria-invalid`, `aria-describedby` para errores, `motion-reduce:animate-none` en las transiciones.
 - **Next 16**: todo el cambio vive en componentes `"use client"` existentes; sin APIs nuevas del framework.

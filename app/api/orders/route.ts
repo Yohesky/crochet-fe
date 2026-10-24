@@ -11,6 +11,8 @@ const orderSchema = z.object({
     lastName: z.string().trim().min(2),
     phone: z.string().trim().regex(/^\d{7,15}$/),
     address: z.string().trim().min(5),
+    // Optional for backward compatibility with older clients
+    customizations: z.string().trim().max(500).optional().default(""),
     items: z.array(orderItemSchema).min(1),
 });
 

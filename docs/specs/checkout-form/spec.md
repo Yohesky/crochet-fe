@@ -12,12 +12,13 @@ Agregar un paso de checkout dentro del drawer del carrito: formulario de datos p
 
 1. **Carrito**: el botón principal es "Siguiente" (disabled solo si el carrito está vacío).
 2. **Click en "Siguiente"** -> el contenido del drawer se reemplaza por el formulario (items y footer se ocultan). Incluye botón "Volver al carrito".
-3. **Formulario**: nombre, apellido, teléfono de contacto y dirección. El botón "Pagar" nace `disabled` y solo se habilita cuando el formulario es válido.
+3. **Formulario**: nombre, apellido, teléfono de contacto, dirección y un campo de texto libre opcional para indicar cambios o adaptaciones al producto. El botón "Pagar" nace `disabled` y solo se habilita cuando el formulario es válido.
 4. **Click en "Pagar"** -> se muestra el alert de instrucciones de pago (transferencia + comprobante por WhatsApp), con foco en el abono del 50% por adelantado y el 50% restante al finalizar el producto.
 
 ## Reglas de negocio
 
-- Todos los campos son obligatorios; el botón "Pagar" permanece `disabled` mientras haya campos vacíos o inválidos.
+- Todos los campos son obligatorios salvo "Cambios o adaptaciones al producto" (opcional); el botón "Pagar" permanece `disabled` mientras haya campos obligatorios vacíos o inválidos.
+- El campo de cambios/adaptaciones muestra siempre una línea fija verde debajo: "Esto es un producto de referencia, si necesitas algún cambio descríbelo en esta cajita". No es un mensaje de validación: no desaparece ni cambia de color.
 - El monto del abono es `ceil(total / 2)` y el restante `total - abono`, ambos mostrados en pesos (formato es-CO).
 - El mensaje prellenado de WhatsApp y el número de contacto NO cambian respecto al flujo anterior.
 - Los datos del formulario persisten en el store: si el usuario vuelve al carrito y regresa, no los vuelve a escribir.
@@ -31,6 +32,7 @@ Agregar un paso de checkout dentro del drawer del carrito: formulario de datos p
 | Apellido | min 2 caracteres (post-trim) | "Ingresa tu apellido" |
 | Teléfono | se descartan espacios, `+`, guiones y paréntesis; quedan 7 a 15 dígitos | "Ingresa un teléfono válido (entre 7 y 15 dígitos)" |
 | Dirección | min 5 caracteres (post-trim) | "Ingresa tu dirección completa" |
+| Cambios o adaptaciones | opcional, max 500 caracteres | "Máximo 500 caracteres" |
 
 ## Transiciones
 

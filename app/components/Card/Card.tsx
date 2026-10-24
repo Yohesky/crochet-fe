@@ -37,9 +37,9 @@ export const Card = ({ product }: { product: IProduct }) => {
 
             <div className="flex flex-1 flex-col gap-2 p-4">
                 <Link href={product.link}>
-                    <h2 className="text-lg font-semibold text-ink-900">{product.title}</h2>
+                    <h2 className="text-l font-semibold text-ink-900">{product.title}</h2>
                 </Link>
-                <p className="line-clamp-3 text-sm leading-relaxed text-ink-600">
+                <p className="line-clamp-3 text-xs leading-relaxed text-ink-600">
                     {product.description}
                 </p>
 

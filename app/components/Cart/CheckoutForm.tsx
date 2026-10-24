@@ -24,15 +24,15 @@ const checkoutSchema = z.object({
         .transform((value) => value.replace(/[\s()+-]/g, ""))
         .pipe(z.string().regex(/^\d{7,15}$/, "Ingresa un teléfono válido (entre 7 y 15 dígitos)")),
     address: z.string().trim().min(5, "Ingresa tu dirección completa"),
+    customizations: z.string().trim().max(500, "Máximo 500 caracteres"),
 })
 
 type CheckoutFormData = z.infer<typeof checkoutSchema>
 
 const inputClasses = (hasError: boolean) =>
-    `w-full rounded-xl border bg-ink-900/[0.03] px-4 py-2.5 text-sm text-ink-900 outline-none transition-colors placeholder:text-ink-400 ${
-        hasError
-            ? "border-blush-400 focus:border-blush-500"
-            : "border-ink-900/10 focus:border-lavender-500"
+    `w-full rounded-xl border bg-ink-900/[0.03] px-4 py-2.5 text-sm text-ink-900 outline-none transition-colors placeholder:text-ink-400 ${hasError
+        ? "border-blush-400 focus:border-blush-500"
+        : "border-ink-900/10 focus:border-lavender-500"
     }`
 
 const ArrowLeftIcon = () => (
@@ -49,6 +49,7 @@ const ArrowLeftIcon = () => (
 
 export const CheckoutForm = ({ total }: { total: number }) => {
     const setCheckoutStep = useCartStore((s) => s.setCheckoutStep)
+    const clearCart = useCartStore((s) => s.clearCart)
     const cart = useCartStore((s) => s.cart)
     const storedData = useCartStore((s) => s.checkoutData)
     const setCheckoutData = useCartStore((s) => s.setCheckoutData)
@@ -61,6 +62,7 @@ export const CheckoutForm = ({ total }: { total: number }) => {
         handleSubmit,
         watch,
         formState: { errors, isValid },
+        reset
     } = useForm<CheckoutFormData>({
         resolver: zodResolver(checkoutSchema),
         mode: "onTouched",
@@ -75,6 +77,7 @@ export const CheckoutForm = ({ total }: { total: number }) => {
                 lastName: values.lastName ?? "",
                 phone: values.phone ?? "",
                 address: values.address ?? "",
+                customizations: values.customizations ?? "",
             })
         )
         return () => subscription.unsubscribe()
@@ -89,6 +92,7 @@ export const CheckoutForm = ({ total }: { total: number }) => {
             lastName: data.lastName.trim(),
             phone: data.phone.replace(/[\s()+-]/g, ""),
             address: data.address.trim(),
+            customizations: data.customizations.trim(),
             items: cart.map((item) => ({ title: item.title, price: item.price })),
         }
 
@@ -109,6 +113,13 @@ export const CheckoutForm = ({ total }: { total: number }) => {
             console.error(error)
             setSubmitStatus("error")
         }
+        finally {
+            clearForm()
+        }
+    }
+
+    const clearForm = () => {
+        reset()
     }
 
     return (
@@ -218,6 +229,34 @@ export const CheckoutForm = ({ total }: { total: number }) => {
                                 {errors.address.message}
                             </p>
                         )}
+                    </div>
+
+                    <div className="flex flex-col gap-1.5">
+                        <label htmlFor="checkout-customizations" className="text-sm font-medium text-ink-600">
+                            Cambios o adaptaciones al producto
+                        </label>
+                        <textarea
+                            id="checkout-customizations"
+                            rows={3}
+                            placeholder="Ej: quiero el gorro en color azul, sin lazo y un poco más grande"
+                            maxLength={500}
+                            aria-invalid={Boolean(errors.customizations)}
+                            aria-describedby={
+                                errors.customizations
+                                    ? "checkout-customizations-error checkout-customizations-hint"
+                                    : "checkout-customizations-hint"
+                            }
+                            className={`${inputClasses(Boolean(errors.customizations))} min-h-[88px] resize-y`}
+                            {...register("customizations")}
+                        />
+                        {errors.customizations && (
+                            <p id="checkout-customizations-error" className="text-sm text-blush-500">
+                                {errors.customizations.message}
+                            </p>
+                        )}
+                        <p id="checkout-customizations-hint" className="text-sm text-sage-600">
+                            Esto es un producto de referencia, si necesitas algún cambio descríbelo en esta cajita
+                        </p>
                     </div>
                 </div>
             </div>

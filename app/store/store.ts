@@ -8,6 +8,7 @@ export type CheckoutData = {
     lastName: string,
     phone: string,
     address: string,
+    customizations: string,
 }
 
 export const EMPTY_CHECKOUT_DATA: CheckoutData = {
@@ -15,6 +16,7 @@ export const EMPTY_CHECKOUT_DATA: CheckoutData = {
     lastName: "",
     phone: "",
     address: "",
+    customizations: "",
 }
 
 type State = {
@@ -27,6 +29,7 @@ type State = {
     setCheckoutStep: (step: CheckoutStep) => void,
     checkoutData: CheckoutData,
     setCheckoutData: (data: CheckoutData) => void,
+    clearCart: () => void,
 }
 
 export const useCartStore = create<State>((set) => ({
@@ -39,4 +42,5 @@ export const useCartStore = create<State>((set) => ({
     setCheckoutStep: (step: CheckoutStep) => set({ checkoutStep: step }),
     checkoutData: EMPTY_CHECKOUT_DATA,
     setCheckoutData: (data: CheckoutData) => set({ checkoutData: data }),
+    clearCart: () => set({ cart: [] }),
 }))

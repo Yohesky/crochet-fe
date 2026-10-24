@@ -10,18 +10,19 @@ Persistir cada pedido como una fila en la pestaña `pedidos` del mismo spreadshe
 
 ## Flujo
 
-1. Click en "Pagar" (form válido) -> `POST /api/orders` con nombre, apellido, teléfono, dirección e items.
+1. Click en "Pagar" (form válido) -> `POST /api/orders` con nombre, apellido, teléfono, dirección, cambios/adaptaciones solicitadas e items.
 2. El server valida, calcula total / abono 50% / restante y agrega la fila.
 3. Si el registro es exitoso -> se muestra el alert de instrucciones de pago (50% por adelantado). Si falla -> mensaje de error y se permite reintentar.
 
 ## Columnas de la pestaña `pedidos`
 
-`Fecha | Nombre | Apellido | Teléfono | Dirección | Items | Total | Abono 50% | Restante`
+`Fecha | Nombre | Apellido | Teléfono | Dirección | Items | Total | Abono 50% | Restante | Cambios / adaptaciones`
 
 - Fecha: `dd/aa/yyyy hh:mm` (locale es-CO, generada en el server).
 - Items: títulos de los productos separados por coma (una fila por pedido, los repetidos aparecen repetidos).
 - Total / Abono / Restante: calculados en el server (abono = `ceil(total / 2)`).
-- La pestaña se crea automáticamente (con headers) en el primer pedido si no existe.
+- Cambios / adaptaciones: texto libre opcional (máx. 500 caracteres) con los cambios que el comprador pide al producto; vacío si no aplica.
+- La app solo inserta la fila: la pestaña `pedidos` y sus headers los gestiona la vendedora en el spreadsheet (la app no crea ni modifica headers).
 
 ## Reglas
 
@@ -33,7 +34,7 @@ Persistir cada pedido como una fila en la pestaña `pedidos` del mismo spreadshe
 ## Requisitos de configuración (manuales, fuera del código)
 
 - Compartir el spreadsheet con el email de la service account como **Editor** (sin esto la API rechaza la escritura con 403).
-- No se requiere crear la pestaña `pedidos` a mano: la app la crea sola.
+- La pestaña `pedidos` debe existir con sus headers en el spreadsheet: la app no la crea.
 
 ## Alcance
 
