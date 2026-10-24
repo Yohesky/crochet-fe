@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { productUseCaseImpl } from "@/src/config/container";
-import { Button } from "@/app/components/Button/Button";
 import { Layout } from "@/app/components/Layout/Layout";
+import { AddToCartButton } from "@/app/components/Product/AddToCartButton";
+import { ProductSpecs } from "@/app/components/Product/ProductSpecs";
 import { formatPrice } from "@/src/presentation/formatters/priceFormatter";
 
 // Rebuilds the page (re-fetching the Google Sheet) at most every 2 minutes.
@@ -42,21 +43,10 @@ export default async function ProductDetailPage({
                         {product.description}
                     </p>
 
-                    <dl className="mt-2 flex flex-col gap-4">
-                        {product.details.map((detail) => (
-                            <div
-                                key={detail.label}
-                                className="flex flex-col gap-1 border-t border-ink-900/10 pt-4 first:border-t-0 first:pt-0"
-                            >
-                                <dt className="text-xs font-bold uppercase tracking-wide text-lavender-600">
-                                    {detail.label}
-                                </dt>
-                                <dd className="text-sm leading-relaxed text-ink-600">
-                                    {detail.value}
-                                </dd>
-                            </div>
-                        ))}
-                    </dl>
+                    <ProductSpecs
+                        details={product.details}
+                        className="mt-2"
+                    />
 
                     <div className="mt-2 flex items-center justify-between">
                         <span className="text-2xl font-bold tabular-nums text-ink-900">
@@ -64,9 +54,7 @@ export default async function ProductDetailPage({
                         </span>
                     </div>
 
-                    <Button size="lg" className="mt-2 w-full">
-                        Agregar al carrito
-                    </Button>
+                    <AddToCartButton product={product} className="mt-2 w-full" />
                 </div>
             </article>
         </Layout>
